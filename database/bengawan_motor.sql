@@ -82,9 +82,12 @@ VALUES (
 ON DUPLICATE KEY UPDATE email = VALUES(email);
 
 -- ============================================================================
--- 5. Kumpulan Query Operasional (Ekuivalen Endpoint di server.js)
+-- 5. Referensi Query Operasional (Ekuivalen Endpoint di server.js)
+--    Catatan: Bagian ini sengaja dikomentari agar file ini dapat di-import
+--    langsung di Laragon / HeidiSQL / phpMyAdmin tanpa error sintaks prepared statement (?).
 -- ============================================================================
 
+/*
 -- [A] Cek sisa kuota slot per jam pada tanggal tertentu (KUOTA = 3)
 -- Parameter: :tanggal (contoh '2026-11-20')
 SELECT
@@ -98,7 +101,7 @@ FROM (
   SELECT '15:00' UNION ALL SELECT '16:00'
 ) s
 LEFT JOIN reservasi r
-  ON r.tanggal = ?
+  ON r.tanggal = '2026-11-20'
   AND r.jam = s.jam
   AND r.status <> 'Dibatalkan'
 GROUP BY s.jam
@@ -114,24 +117,24 @@ SELECT
   merk,
   CONCAT(LEFT(plat, GREATEST(0, CHAR_LENGTH(plat) - 2)), '**') AS plat
 FROM reservasi
-WHERE kode = UPPER(TRIM(?))
+WHERE kode = UPPER(TRIM('BM-20261120-001'))
 LIMIT 1;
 
 -- [C] Riwayat reservasi pelanggan / semua reservasi (admin)
 SELECT *
 FROM reservasi
-WHERE user_id = ?
+WHERE user_id = 1
 ORDER BY tanggal DESC, jam DESC;
 
 -- [D] Batalkan reservasi oleh pelanggan (hanya jika status 'Menunggu')
 UPDATE reservasi
 SET status = 'Dibatalkan'
-WHERE id = ? AND user_id = ? AND status = 'Menunggu';
+WHERE id = 1 AND user_id = 1 AND status = 'Menunggu';
 
 -- [E] Ubah status & biaya akhir oleh admin
 UPDATE reservasi
-SET status = ?, biaya = COALESCE(?, biaya)
-WHERE id = ?;
+SET status = 'Selesai', biaya = 350000
+WHERE id = 1;
 
 -- [F] Laporan pendapatan bulanan (12 bulan terakhir, hanya status 'Selesai')
 SELECT
@@ -181,6 +184,7 @@ LEFT JOIN reservasi r ON r.user_id = u.id
 WHERE u.role = 'pelanggan'
 GROUP BY u.id, u.nama, u.hp, u.email
 ORDER BY u.id DESC;
+*/
 
 -- ============================================================================
 -- 6. Perintah Backup & Restore CLI (MySQL)
