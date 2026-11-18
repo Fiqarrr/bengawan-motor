@@ -1,99 +1,178 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Bengawan Motor - Servis Mobil dengan Reservasi Online</title>
-<meta name="description" content="Bengkel mobil Bengawan Motor. Reservasi servis online, pilih jam masuk mobil, dan pantau status pengerjaan.">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Bengawan Motor - Servis Mobil dengan Reservasi Online</title>
+  <meta name="description"
+    content="Bengkel mobil Bengawan Motor. Reservasi servis online, pilih jam masuk mobil, dan pantau status pengerjaan.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/style.css">
 </head>
+
 <body>
-<section class="hero"><div class="dalam">
-  <div>
-    <span class="label">Premium Car Service</span>
-    <h1>Your Car Deserves Better Care.</h1>
-    <p>Servis mobil lebih mudah, nyaman, dan terpercaya. Atur jadwal perawatan kendaraan Anda tanpa harus mengantre.</p>
-    <div class="aksi"><a class="btn" href="/reservasi.html">Booking Servis</a><a class="btn garis" href="#cek">Cek Status</a></div>
+  <section class="hero">
+    <div class="dalam">
+      <div>
+        <span class="label">Premium Car Service</span>
+        <h1>Your Car Deserves Better Care.</h1>
+        <p>Servis mobil lebih mudah, nyaman, dan terpercaya. Atur jadwal perawatan kendaraan Anda tanpa harus mengantre.
+        </p>
+        <div class="aksi"><a class="btn" href="/reservasi.html">Booking Servis</a><a class="btn garis" href="#cek">Cek
+            Status</a></div>
+      </div>
+      <div class="hero-foto"><img src="/img/hero.jpg" alt="Teknisi merawat mobil di bengkel"><span id="heroJam"></span>
+      </div>
+    </div>
+  </section>
+
+  <div class="dalam">
+    <div class="dua-kartu" id="cek">
+      <div class="kartu-p">
+        <h3>Jam masuk mobil</h3><label for="tgl" style="margin-top:4px">Pilih tanggal</label><input type="date"
+          id="tgl">
+        <div id="slot" style="margin-top:14px"></div>
+      </div>
+      <div class="kartu-p" id="lacak">
+        <h3>Cek status servis</h3>
+        <p style="color:var(--abu);margin-top:0">Masukkan kode reservasi untuk melihat tahap pengerjaan mobil Anda.</p>
+        <div class="cek"><input id="kode" placeholder="Contoh: BM-20261112-001" aria-label="Kode reservasi"><button
+            class="btn gelap" id="bCek" type="button">Cek status</button></div>
+        <div id="hasilCek"></div>
+      </div>
+    </div>
   </div>
-  <div class="hero-foto"><img src="/img/hero.jpg" alt="Teknisi merawat mobil di bengkel"><span id="heroJam"></span></div>
-</div></section>
 
-<div class="dalam"><div class="dua-kartu" id="cek">
-  <div class="kartu-p"><h3>Jam masuk mobil</h3><label for="tgl" style="margin-top:4px">Pilih tanggal</label><input type="date" id="tgl"><div id="slot" style="margin-top:14px"></div></div>
-  <div class="kartu-p" id="lacak"><h3>Cek status servis</h3><p style="color:var(--abu);margin-top:0">Masukkan kode reservasi untuk melihat tahap pengerjaan mobil Anda.</p>
-    <div class="cek"><input id="kode" placeholder="Contoh: BM-20261112-001" aria-label="Kode reservasi"><button class="btn gelap" id="bCek" type="button">Cek status</button></div><div id="hasilCek"></div></div>
-</div></div>
+  <section class="blok" id="layanan">
+    <div class="dalam">
+      <div class="judul-sec"><span class="label">Layanan</span>
+        <h2>Layanan Servis Mobil</h2>
+        <p>Pilih satu atau beberapa layanan sesuai kebutuhan mobil Anda. Estimasi biaya ditampilkan sejak awal.</p>
+      </div>
+      <div class="kisi" id="layananList"></div>
+      <div class="cara">
+        <div><b>1</b>
+          <h3>Daftar atau masuk</h3>
+          <p>Buat akun dengan nomor HP agar bengkel dapat menghubungi Anda.</p>
+        </div>
+        <div><b>2</b>
+          <h3>Pilih layanan dan jam</h3>
+          <p>Pilih layanan, lihat estimasi biaya, lalu tentukan jam masuk mobil.</p>
+        </div>
+        <div><b>3</b>
+          <h3>Datang sesuai jadwal</h3>
+          <p>Simpan kode reservasi dan pantau statusnya sampai selesai.</p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section class="blok" id="layanan"><div class="dalam">
-  <div class="judul-sec"><span class="label">Layanan</span><h2>Layanan Servis Mobil</h2><p>Pilih satu atau beberapa layanan sesuai kebutuhan mobil Anda. Estimasi biaya ditampilkan sejak awal.</p></div>
-  <div class="kisi" id="layananList"></div>
-  <div class="cara">
-    <div><b>1</b><h3>Daftar atau masuk</h3><p>Buat akun dengan nomor HP agar bengkel dapat menghubungi Anda.</p></div>
-    <div><b>2</b><h3>Pilih layanan dan jam</h3><p>Pilih layanan, lihat estimasi biaya, lalu tentukan jam masuk mobil.</p></div>
-    <div><b>3</b><h3>Datang sesuai jadwal</h3><p>Simpan kode reservasi dan pantau statusnya sampai selesai.</p></div>
-  </div>
-</div></section>
+  <section class="blok putih" id="tentang">
+    <div class="dalam tentang">
+      <div><span class="label">Tentang Kami</span>
+        <h2>Tentang Bengawan Motor</h2>
+        <div id="tentangTeks"></div>
+        <div class="aksi" style="margin-top:22px"><a class="btn" href="/reservasi.html">Booking Servis</a></div>
+      </div>
+      <div class="profil">
+        <div class="logo2"><img src="/logo-kiri.svg" alt="Logo Bengawan Motor"><img src="/logo-kanan.svg" alt=""></div>
+        <div class="fakta" id="fakta"></div>
+      </div>
+    </div>
+  </section>
 
-<section class="blok putih" id="tentang"><div class="dalam tentang">
-  <div><span class="label">Tentang Kami</span><h2>Tentang Bengawan Motor</h2><div id="tentangTeks"></div><div class="aksi" style="margin-top:22px"><a class="btn" href="/reservasi.html">Booking Servis</a></div></div>
-  <div class="profil"><div class="logo2"><img src="/logo-kiri.svg" alt="Logo Bengawan Motor"><img src="/logo-kanan.svg" alt=""></div><div class="fakta" id="fakta"></div></div>
-</div></section>
+  <section class="blok gelap" id="galeri">
+    <div class="dalam">
+      <div class="judul-sec"><span class="label">Galeri</span>
+        <h2>Galeri Bengkel</h2>
+        <p>Suasana tempat servis, teknisi, dan aktivitas pengerjaan di Bengawan Motor.</p>
+      </div>
+      <div class="galeri" id="galeriList"></div>
+    </div>
+  </section>
 
-<section class="blok gelap" id="galeri"><div class="dalam">
-  <div class="judul-sec"><span class="label">Galeri</span><h2>Galeri Bengkel</h2><p>Suasana tempat servis, teknisi, dan aktivitas pengerjaan di Bengawan Motor.</p></div>
-  <div class="galeri" id="galeriList"></div>
-</div></section>
+  <section class="blok" id="alasan">
+    <div class="dalam">
+      <div class="judul-sec"><span class="label">Keunggulan</span>
+        <h2>Mengapa Memilih Kami</h2>
+        <p>Kami membuat proses servis lebih teratur dan transparan untuk setiap pelanggan.</p>
+      </div>
+      <div class="fitur-grid" id="alasanList"></div>
+    </div>
+  </section>
 
-<section class="blok" id="alasan"><div class="dalam">
-  <div class="judul-sec"><span class="label">Keunggulan</span><h2>Mengapa Memilih Kami</h2><p>Kami membuat proses servis lebih teratur dan transparan untuk setiap pelanggan.</p></div>
-  <div class="fitur-grid" id="alasanList"></div>
-</div></section>
+  <section class="blok putih" id="testimoni">
+    <div class="dalam">
+      <div class="judul-sec"><span class="label">Testimoni</span>
+        <h2>Kata Pelanggan Kami</h2>
+        <p>Pengalaman pelanggan yang telah merawat mobilnya di Bengawan Motor.</p>
+      </div>
+      <div class="testi" id="testiList"></div>
+      <p class="catatan" id="testiCatatan"></p>
+    </div>
+  </section>
 
-<section class="blok putih" id="testimoni"><div class="dalam">
-  <div class="judul-sec"><span class="label">Testimoni</span><h2>Kata Pelanggan Kami</h2><p>Pengalaman pelanggan yang telah merawat mobilnya di Bengawan Motor.</p></div>
-  <div class="testi" id="testiList"></div><p class="catatan" id="testiCatatan"></p>
-</div></section>
+  <section class="blok" id="faq">
+    <div class="dalam">
+      <div class="judul-sec"><span class="label">FAQ</span>
+        <h2>Pertanyaan yang Sering Diajukan</h2>
+        <p>Seputar reservasi dan servis di Bengawan Motor.</p>
+      </div>
+      <div class="faq" id="faqList"></div>
+    </div>
+  </section>
 
-<section class="blok" id="faq"><div class="dalam">
-  <div class="judul-sec"><span class="label">FAQ</span><h2>Pertanyaan yang Sering Diajukan</h2><p>Seputar reservasi dan servis di Bengawan Motor.</p></div>
-  <div class="faq" id="faqList"></div>
-</div></section>
+  <section class="blok putih" id="lokasi">
+    <div class="dalam">
+      <div class="judul-sec"><span class="label">Lokasi</span>
+        <h2>Lokasi Bengkel</h2>
+        <p>Kunjungi kami sesuai jam operasional atau hubungi lewat WhatsApp.</p>
+      </div>
+      <div class="lokasi">
+        <div class="info" id="infoLokasi"></div>
+        <div class="peta" id="peta"></div>
+      </div>
+    </div>
+  </section>
 
-<section class="blok putih" id="lokasi"><div class="dalam">
-  <div class="judul-sec"><span class="label">Lokasi</span><h2>Lokasi Bengkel</h2><p>Kunjungi kami sesuai jam operasional atau hubungi lewat WhatsApp.</p></div>
-  <div class="lokasi"><div class="info" id="infoLokasi"></div><div class="peta" id="peta"></div></div>
-</div></section>
+  <script src="/config.js"></script>
+  <script src="/app.js"></script>
+  <script>
+    pasangNav();
+    const B = BENGKEL, ik = k => ikon(k);
+    $('#heroJam').textContent = 'Buka ' + B.jam[0][0] + ', ' + B.jam[0][1];
+    $('#layananList').innerHTML = LAYANAN.map(l => `<div class="lay"><div class="ico">${ik(l.i)}</div><h3>${l.n}</h3><p>${l.d}</p><small>Mulai ${rp(l.h)}</small></div>`).join('');
+    $('#tentangTeks').innerHTML = B.tentang.map(t => `<p>${esc(t)}</p>`).join('');
+    $('#fakta').innerHTML = [[LAYANAN.length, 'Jenis layanan'], [3, 'Mobil per jam'], B.tahunBerdiri ? [B.tahunBerdiri, 'Berdiri sejak'] : [6, 'Hari buka']].map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('');
+    $('#galeriList').innerHTML = B.galeri.map(g => `<div class="foto"><img src="/${esc(g.foto)}" alt="${esc(g.judul)}" loading="lazy"><span>${esc(g.judul)}</span></div>`).join('');
+    document.querySelectorAll('.foto img').forEach((im, i) => {
+      const gagal = () => { const f = im.parentNode; f.classList.add('kosong'); f.innerHTML = ik('kamera') + `<span>${esc(B.galeri[i].judul)}</span><small>Foto belum diunggah</small>`; };
+      im.addEventListener('error', gagal); if (im.complete && !im.naturalWidth) gagal();
+    });
+    $('#alasanList').innerHTML = B.alasan.map(([i, j, t]) => `<div class="fitur"><div class="ico">${ik(i)}</div><h3>${j}</h3><p>${t}</p></div>`).join('');
+    $('#testiList').innerHTML = B.testimoni.map(t => `<blockquote><div class="bintang" aria-label="${t.bintang} dari 5">${'★'.repeat(t.bintang)}${'☆'.repeat(5 - t.bintang)}</div><p>“${esc(t.teks)}”</p><footer><div class="av">${esc(t.nama[0])}</div><div><b>${esc(t.nama)}</b><small>${esc(t.mobil)}</small></div></footer></blockquote>`).join('');
 
-<script src="/config.js"></script><script src="/app.js"></script>
-<script>
-  pasangNav();
-  const B = BENGKEL, ik = k => ikon(k);
-  $('#heroJam').textContent = 'Buka ' + B.jam[0][0] + ', ' + B.jam[0][1];
-  $('#layananList').innerHTML = LAYANAN.map(l => `<div class="lay"><div class="ico">${ik(l.i)}</div><h3>${l.n}</h3><p>${l.d}</p><small>Mulai ${rp(l.h)}</small></div>`).join('');
-  $('#tentangTeks').innerHTML = B.tentang.map(t => `<p>${esc(t)}</p>`).join('');
-  $('#fakta').innerHTML = [[LAYANAN.length, 'Jenis layanan'], [3, 'Mobil per jam'], B.tahunBerdiri ? [B.tahunBerdiri, 'Berdiri sejak'] : [6, 'Hari buka']].map(([a, b]) => `<div><b>${a}</b><span>${b}</span></div>`).join('');
-  $('#galeriList').innerHTML = B.galeri.map(g => `<div class="foto"><img src="/${esc(g.foto)}" alt="${esc(g.judul)}" loading="lazy"><span>${esc(g.judul)}</span></div>`).join('');
-  document.querySelectorAll('.foto img').forEach((im, i) => { const gagal = () => { const f = im.parentNode; f.classList.add('kosong'); f.innerHTML = ik('kamera') + `<span>${esc(B.galeri[i].judul)}</span><small>Foto belum diunggah</small>`; };
-    im.addEventListener('error', gagal); if (im.complete && !im.naturalWidth) gagal(); });
-  $('#alasanList').innerHTML = B.alasan.map(([i, j, t]) => `<div class="fitur"><div class="ico">${ik(i)}</div><h3>${j}</h3><p>${t}</p></div>`).join('');
-  $('#testiList').innerHTML = B.testimoni.map(t => `<blockquote><div class="bintang" aria-label="${t.bintang} dari 5">${'★'.repeat(t.bintang)}${'☆'.repeat(5 - t.bintang)}</div><p>“${esc(t.teks)}”</p><footer><div class="av">${esc(t.nama[0])}</div><div><b>${esc(t.nama)}</b><small>${esc(t.mobil)}</small></div></footer></blockquote>`).join('');
-  if (B.testimoniContoh) $('#testiCatatan').textContent = '*Ulasan di atas adalah contoh tampilan. Ganti dengan ulasan asli pelanggan pada berkas config.js.';
-  $('#faqList').innerHTML = B.faq.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
-  const m = B.maps ? ((B.maps.match(/src="([^"]+)"/) || [])[1] || B.maps) : (B.alamat ? 'https://www.google.com/maps?q=' + encodeURIComponent('Bengawan Motor ' + B.alamat) + '&output=embed' : '');
-  $('#peta').innerHTML = m ? `<iframe src="${esc(m)}" title="Peta lokasi Bengawan Motor" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>` : `<div class="kosong"><div>${ik('pin').replace('<svg', '<svg width="40" height="40"')}<p>Peta akan tampil setelah alamat bengkel diisi pada berkas config.js.</p></div></div>`;
-  $('#infoLokasi').innerHTML = `<div class="baris-i"><div class="ico">${ik('pin')}</div><div><b>Alamat</b>${B.alamat ? esc(B.alamat) : '<span style="color:var(--abu)">Alamat belum diisi (berkas config.js).</span>'}</div></div>
+    $('#faqList').innerHTML = B.faq.map(([q, a], i) => `<details${i === 0 ? ' open' : ''}><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
+    const m = B.maps ? ((B.maps.match(/src="([^"]+)"/) || [])[1] || B.maps) : (B.alamat ? 'https://www.google.com/maps?q=' + encodeURIComponent('Bengawan Motor ' + B.alamat) + '&output=embed' : '');
+    $('#peta').innerHTML = m ? `<iframe src="${esc(m)}" title="Peta lokasi Bengawan Motor" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>` : `<div class="kosong"><div>${ik('pin').replace('<svg', '<svg width="40" height="40"')}<p>Peta akan tampil setelah alamat bengkel diisi pada berkas config.js.</p></div></div>`;
+    $('#infoLokasi').innerHTML = `<div class="baris-i"><div class="ico">${ik('pin')}</div><div><b>Alamat</b>${B.alamat ? esc(B.alamat) : '<span style="color:var(--abu)">Alamat belum diisi (berkas config.js).</span>'}</div></div>
     <div class="baris-i"><div class="ico">${ik('jam')}</div><div style="flex:1"><b>Jam Operasional</b><table>${B.jam.map(([h, j]) => `<tr><td>${h}</td><td>${j}</td></tr>`).join('')}</table></div></div>
     <div class="baris-i"><div class="ico">${ik('telp')}</div><div><b>WhatsApp</b>${B.waTampil}</div></div>
     <div class="aksi"><a class="btn kecil" target="_blank" rel="noopener" href="https://wa.me/${B.wa}">Chat WhatsApp</a>${B.alamat ? `<a class="btn kecil gelap" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('Bengawan Motor ' + B.alamat)}">Petunjuk Arah</a>` : ''}</div>`;
-  const t = $('#tgl'); t.min = t.value = hariIniISO(1);
-  t.onchange = () => isiSlot(t.value, $('#slot')); t.onchange();
-  $('#bCek').onclick = async () => {
-    try {
-      const x = await api('/api/cek/' + encodeURIComponent($('#kode').value.trim()));
-      $('#hasilCek').innerHTML = `<div class="kartu s-${x.status}"><div class="kode">${x.kode}</div><div>${esc(x.layanan)} - ${esc(x.merk)} (${esc(x.plat)})</div><small>${fmtTgl(x.tanggal)}, jam masuk ${x.jam}</small>${garisWaktu(x.status)}</div>`;
-    } catch (e) { $('#hasilCek').innerHTML = ''; toast(e.message, true); }
-  };
-</script>
+    const t = $('#tgl'); t.min = t.value = hariIniISO(1);
+    t.onchange = () => isiSlot(t.value, $('#slot')); t.onchange();
+    $('#bCek').onclick = async () => {
+      try {
+        const x = await api('/api/cek/' + encodeURIComponent($('#kode').value.trim()));
+        $('#hasilCek').innerHTML = `<div class="kartu s-${x.status}"><div class="kode">${x.kode}</div><div>${esc(x.layanan)} - ${esc(x.merk)} (${esc(x.plat)})</div><small>${fmtTgl(x.tanggal)}, jam masuk ${x.jam}</small>${garisWaktu(x.status)}</div>`;
+      } catch (e) { $('#hasilCek').innerHTML = ''; toast(e.message, true); }
+    };
+  </script>
 </body>
+
 </html>

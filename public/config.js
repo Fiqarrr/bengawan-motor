@@ -6,11 +6,11 @@ const BENGKEL = {
   nama: 'Bengawan Motor',
   wa: '6285217570226',            // nomor WhatsApp (awali 62, tanpa +)
   waTampil: '0852 1757 0226',
-  alamat: '',                     // ISI: alamat lengkap bengkel, contoh: 'Jl. Contoh No. 10, Jakarta'
-  maps: '',                       // OPSIONAL: tempel link "Embed a map" dari Google Maps. Kosong = pakai pencarian dari alamat
+  alamat: 'Jl. TB Simatupang No.10, RT.2/RW.2, Cilandak Tim., Ps. Minggu, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12560, Indonesia',                     // ISI: alamat lengkap bengkel, contoh: 'Jl. Contoh No. 10, Jakarta'
+  maps: '<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.7855305171015!2d106.8164195!3d-6.2918941!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1da85f44977%3A0x99d5b9f1c541ada4!2sVOLVO%20BENGAWAN%20MOTOR!5e0!3m2!1sen!2sid!4v1794999530943!5m2!1sen!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="strict-origin-when-cross-origin"></iframe>',                       // OPSIONAL: tempel link "Embed a map" dari Google Maps. Kosong = pakai pencarian dari alamat
   jam: [['Senin - Sabtu', '08.00 - 17.00'], ['Minggu', 'Tutup']],
   sosial: { instagram: '', facebook: '', tiktok: '', youtube: '' },   // ISI dengan link akun (https://...)
-  tahunBerdiri: '',               // OPSIONAL: contoh '2010' (tampil di bagian Tentang jika diisi)
+  tahunBerdiri: '2000',               // OPSIONAL: contoh '2010' (tampil di bagian Tentang jika diisi)
 
   tentang: [
     'Bengawan Motor adalah bengkel mobil yang melayani servis dan perawatan berkala kendaraan roda empat. Kami ingin pemilik mobil dapat merawat kendaraannya dengan tenang, tanpa harus menghabiskan waktu menunggu giliran.',
