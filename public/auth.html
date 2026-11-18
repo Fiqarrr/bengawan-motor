@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Masuk atau Daftar - Bengawan Motor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<section class="banner"><div class="dalam"><span class="label">Akun</span><h1>Masuk atau Daftar</h1><p>Buat akun untuk memesan jam servis dan memantau status mobil Anda.</p></div></section>
+<main class="halaman">
+<div class="auth">
+  <aside class="auth-brand"><img src="/logo-kiri.svg" alt=""><h2>Pesan jam servis lebih cepat</h2>
+    <ul><li>Pilih jam yang masih kosong</li><li>Pantau status pengerjaan</li><li>Konfirmasi lewat WhatsApp</li></ul></aside>
+  <div class="panel pilihan">
+    <div class="tab" role="tablist">
+      <button class="aktif" id="tMasuk" type="button">Masuk</button>
+      <button id="tDaftar" type="button">Daftar</button>
+    </div>
+    <div id="fMasuk">
+      <label for="mEmail">Email</label><input id="mEmail" type="email" autocomplete="email">
+      <label for="mPass">Kata sandi</label><input id="mPass" type="password" autocomplete="current-password">
+      <p><button class="btn gelap" id="bMasuk" type="button">Masuk</button></p>
+    </div>
+    <div id="fDaftar" hidden>
+      <label for="dNama">Nama lengkap</label><input id="dNama" autocomplete="name">
+      <label for="dHp">Nomor HP / WhatsApp</label><input id="dHp" type="tel" autocomplete="tel">
+      <label for="dEmail">Email</label><input id="dEmail" type="email" autocomplete="email">
+      <label for="dPass">Kata sandi (minimal 6 karakter)</label><input id="dPass" type="password" autocomplete="new-password">
+      <p><button class="btn gelap" id="bDaftar" type="button">Buat akun</button></p>
+    </div>
+  </div>
+</div>
+</main>
+<script src="/config.js"></script><script src="/app.js"></script>
+<script>
+  pasangNav();
+  const ganti = masuk => {
+    $('#fMasuk').hidden = !masuk; $('#fDaftar').hidden = masuk;
+    $('#tMasuk').classList.toggle('aktif', masuk); $('#tDaftar').classList.toggle('aktif', !masuk);
+  };
+  $('#tMasuk').onclick = () => ganti(true); $('#tDaftar').onclick = () => ganti(false);
+  $('#bMasuk').onclick = async () => {
+    try {
+      const r = await api('/api/masuk', 'POST', { email: $('#mEmail').value, password: $('#mPass').value });
+      location.href = r.role === 'admin' ? '/admin.html' : '/reservasi.html';
+    } catch (e) { toast(e.message, true); }
+  };
+  $('#bDaftar').onclick = async () => {
+    try {
+      await api('/api/daftar', 'POST', { nama: $('#dNama').value, hp: $('#dHp').value, email: $('#dEmail').value, password: $('#dPass').value });
+      location.href = '/reservasi.html';
+    } catch (e) { toast(e.message, true); }
+  };
+</script>
+</body>
+</html>

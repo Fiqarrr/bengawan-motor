@@ -1,0 +1,13 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "nama": "Admin Bengawan",
+      "hp": "-",
+      "email": "admin@bengawan.test",
+      "password": "$2a$10$F0.nHiVUGIWh8.UIYpqhP.vueJaQM3Cm7ToEH9ahKJRFLuaZt2MVO",
+      "role": "admin"
+    }
+  ],
+  "reservasi": []
+}

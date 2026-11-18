@@ -1,0 +1,12 @@
+{
+  "name": "bengawan-motor-reservasi",
+  "version": "1.0.0",
+  "description": "Sistem Informasi Reservasi Servis Kendaraan Berbasis Web - Bengkel Bengawan Motor",
+  "main": "server.js",
+  "scripts": { "start": "node server.js" },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "express-session": "^1.18.0"
+  }
+}

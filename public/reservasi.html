@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Reservasi Servis - Bengawan Motor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<section class="banner"><div class="dalam"><span class="label">Booking</span><h1>Booking Servis</h1><p>Pilih layanan dan jam masuk mobil, lalu pantau statusnya di sini.</p></div></section>
+<main class="halaman">
+  <div class="dua">
+    <section class="panel">
+      <h2>Reservasi servis</h2>
+      <div class="baris">
+        <div><label for="jenis">Jenis kendaraan</label><select id="jenis"><option>Mobil</option><option>Motor</option></select></div>
+        <div><label for="plat">Plat nomor</label><input id="plat" placeholder="B 1234 ABC"></div>
+      </div>
+      <label for="merk">Merek dan tipe</label><input id="merk" placeholder="Toyota Avanza 2019">
+      <label>Layanan <small style="font-weight:400;color:var(--abu)">(boleh pilih lebih dari satu)</small></label><div class="pilih" id="pilih"></div>
+      <div class="estimasi" id="est"></div>
+      <label for="tgl">Tanggal</label><input type="date" id="tgl">
+      <label>Jam masuk mobil</label><div class="chips" id="chips"></div>
+      <label for="keluhan">Keluhan (opsional)</label>
+      <textarea id="keluhan" rows="3" placeholder="Contoh: mesin kasar saat dingin"></textarea>
+      <p><button class="btn" id="kirim" type="button">Kirim reservasi</button></p>
+    </section>
+    <section><h2>Riwayat reservasi</h2><div id="riwayat"></div></section>
+  </div>
+</main>
+<dialog id="dlg"></dialog>
+<script src="/config.js"></script><script src="/app.js"></script>
+<script>
+  let user, jam = '';
+  (async () => {
+    user = await pasangNav();
+    if (!user) return location.href = '/auth.html';
+    $('#pilih').innerHTML = LAYANAN.map((l, i) => `<label class="opsi"><input type="checkbox" name="lay" value="${i}"><span>${ikon(l.i)}<b>${l.n}</b><small>mulai ${rp(l.h)}</small></span></label>`).join('');
+    $('#pilih').onchange = estimasi; estimasi();
+    const t = $('#tgl'); t.min = t.value = hariIniISO(1); t.onchange = muatSlot; muatSlot();
+    $('#chips').onclick = e => {
+      const b = e.target.closest('.chip'); if (!b || b.disabled) return;
+      jam = b.dataset.j; document.querySelectorAll('.chip').forEach(c => c.classList.toggle('aktif', c === b));
+    };
+    muatRiwayat();
+    $('#kirim').onclick = kirim;
+  })();
+
+  const pilihan = () => [...document.querySelectorAll('input[name=lay]:checked')].map(c => LAYANAN[c.value]);
+  function estimasi() { const p = pilihan();
+    $('#est').innerHTML = p.length ? `Estimasi biaya mulai <b>${rp(p.reduce((a, l) => a + l.h, 0))}</b> untuk ${p.length} layanan. Harga akhir ditentukan setelah pemeriksaan di bengkel.` : 'Pilih satu layanan atau lebih untuk melihat estimasi biaya.'; }
+  async function muatSlot() {
+    jam = '';
+    const s = await api('/api/slot?tanggal=' + $('#tgl').value);
+    if (s.length && s.every(x => x.tutup)) {
+      $('#chips').innerHTML = '<div class="estimasi" style="grid-column:1/-1;margin-top:0">Bengkel tutup pada hari Minggu. Silakan pilih tanggal lain.</div>';
+      return;
+    }
+    $('#chips').innerHTML = s.map(x => `<button type="button" class="chip" data-j="${x.jam}" ${x.sisa ? '' : 'disabled'}>${x.jam}${x.sisa ? '' : '<small>penuh</small>'}</button>`).join('');
+  }
+  async function kirim() {
+    const p = pilihan();
+    if (!p.length) return toast('Pilih minimal satu layanan.', true);
+    if (!jam) return toast('Pilih jam masuk mobil terlebih dahulu.', true);
+    try {
+      const r = await api('/api/reservasi', 'POST', { jenisKendaraan: $('#jenis').value, merk: $('#merk').value, plat: $('#plat').value,
+        layanan: p.map(l => l.n), tanggal: $('#tgl').value, jam, keluhan: $('#keluhan').value });
+      const pesan = `Halo Bengawan Motor, saya ${r.nama} ingin konfirmasi reservasi ${r.kode}: ${r.layanan}, ${fmtTgl(r.tanggal)}, jam masuk mobil ${r.jam}, plat ${r.plat}.`;
+      $('#dlg').innerHTML = `<h2>Reservasi berhasil</h2><p>Simpan kode ini untuk melacak status servis Anda.</p>
+        <div class="kodebesar">${r.kode}</div><p>${fmtTgl(r.tanggal)}, jam masuk ${r.jam}</p>
+        <div class="aksi"><a class="btn" target="_blank" rel="noopener" href="${linkWA(WA, pesan)}">Konfirmasi via WhatsApp</a>
+        <button class="btn garis" onclick="$('#dlg').close()">Tutup</button></div>`;
+      $('#dlg').showModal();
+      $('#merk').value = $('#plat').value = $('#keluhan').value = ''; document.querySelectorAll('input[name=lay]').forEach(c => c.checked = false); estimasi();
+      muatSlot(); muatRiwayat();
+    } catch (e) { toast(e.message, true); }
+  }
+  async function muatRiwayat() {
+    const list = await api('/api/reservasi');
+    $('#riwayat').innerHTML = list.length ? list.map(x => `
+      <div class="kartu s-${x.status}">
+        <div class="kode">${x.kode}</div>
+        <div>${esc(x.layanan)} - ${esc(x.merk)} (${esc(x.plat)})</div>
+        <small>${fmtTgl(x.tanggal)}, jam masuk ${x.jam}</small>${garisWaktu(x.status)}
+        ${x.status === 'Menunggu' ? `<p style="margin:8px 0 0"><button class="btn garis kecil" onclick="batal(${x.id})">Batalkan</button></p>` : ''}
+      </div>`).join('') : '<div class="panel">Belum ada reservasi. Isi formulir untuk memesan jam servis pertama Anda.</div>';
+  }
+  async function batal(id) {
+    if (!confirm('Batalkan reservasi ini?')) return;
+    try { await api(`/api/reservasi/${id}/batal`, 'PATCH'); toast('Reservasi dibatalkan.'); muatRiwayat(); muatSlot(); }
+    catch (e) { toast(e.message, true); }
+  }
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Dashboard Admin - Bengawan Motor</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/logo-kiri.svg" type="image/svg+xml"><link rel="stylesheet" href="/admin.css">
+</head>
+<body>
+<aside class="side" id="side">
+  <div class="side-h"><img src="/logo-kiri.svg" alt=""><div><b>Bengawan Motor</b><small>Akun Admin</small></div></div>
+  <nav id="menu"></nav>
+  <button class="ubah-sandi" id="bSandi" type="button"></button>
+  <button class="keluar" id="keluar"></button>
+</aside>
+<div class="scrim" id="scrim"></div>
+<div class="isi">
+  <header class="top">
+    <button class="ik-btn burger" id="burger" aria-label="Menu"></button>
+    <div><h1 id="salam"></h1><p>Berikut ringkasan aktivitas bengkel hari ini.</p></div>
+    <label class="cr"><span id="icari"></span><input id="cari" type="search" placeholder="Cari kode, pelanggan, plat, layanan..." aria-label="Cari"></label>
+    <button class="btn-v" id="csv" type="button"><span id="iunduh"></span><span class="tx">Unduh CSV</span></button>
+    <button class="ik-btn" id="bel" aria-label="Reservasi menunggu"><span id="ibel"></span><i id="belN"></i></button>
+    <div class="avatar" id="avatar">AD</div>
+  </header>
+  <main>
+    <section class="hal" id="p-dashboard"><div class="dash">
+      <div><div class="stat" id="stat"></div><h2 class="sec">Papan Pengerjaan</h2><div class="board" id="board"></div></div>
+      <aside class="ins"><h2>Ringkasan</h2><div id="insights" style="display:contents"></div></aside>
+    </div></section>
+    <section class="hal" id="p-reservasi" hidden>
+      <div class="alat"><input type="date" id="fTgl" aria-label="Tanggal"><select id="fSt" aria-label="Status"><option value="">Semua status</option></select><button class="btn-v kecil garis" id="reset" type="button">Reset</button></div>
+      <div class="gulir"><table class="tabel"><thead><tr><th>Kode</th><th>Pelanggan</th><th>Kendaraan</th><th>Layanan dan keluhan</th><th>Jam masuk</th><th>Status</th></tr></thead><tbody id="isiR"></tbody></table></div>
+    </section>
+    <section class="hal" id="p-pelanggan" hidden>
+      <div class="gulir"><table class="tabel"><thead><tr><th>Pelanggan</th><th>Email</th><th>Reservasi</th><th>Selesai</th><th>Total biaya</th><th>Terakhir</th></tr></thead><tbody id="isiP"></tbody></table></div>
+    </section>
+    <section class="hal" id="p-pendapatan" hidden>
+      <div class="uang-k" id="uangK"></div>
+      <div class="tabs" id="uangTab"><button type="button" class="aktif" data-m="mingguan">Mingguan</button><button type="button" data-m="bulanan">Bulanan</button><button type="button" data-m="tahunan">Tahunan</button></div>
+      <div class="grafik" id="grafik" role="img" aria-label="Grafik pendapatan"></div><div class="daftar-u" id="daftarU"></div>
+      <p class="cat">Pendapatan dihitung dari reservasi berstatus Selesai berdasarkan tanggal servis, sesuai biaya akhir yang diisi admin.</p>
+    </section>
+  </main>
+</div>
+<dialog id="dlg"></dialog>
+<script src="/app.js"></script><script src="/admin.js"></script>
+</body>
+</html>
