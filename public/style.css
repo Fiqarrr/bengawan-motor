@@ -5,10 +5,11 @@ h1,h2,h3{font-family:var(--judul);font-weight:600;line-height:1.15;margin:0 0 .5
 a{color:inherit}img,svg{max-width:100%}:focus-visible{outline:3px solid var(--coral);outline-offset:2px}main.halaman{flex:1;width:100%;max-width:1180px;margin:-44px auto 0;padding:0 20px 64px;position:relative}
 .dalam{max-width:1180px;margin:auto;padding:0 20px}
 /* header */
-.atas{position:sticky;top:0;z-index:30;background:var(--navy);color:#fff;border-bottom:1px solid rgba(255,255,255,.1)}
+.atas{position:sticky;top:0;z-index:30;background:var(--navy);color:#fff;border-bottom:1px solid rgba(255,255,255,.1);transition:background .25s,box-shadow .25s,border-color .25s}
+.atas.melayang{background:rgba(18,14,56,.96);backdrop-filter:blur(10px);box-shadow:0 10px 30px -10px rgba(0,0,0,.5);border-bottom-color:rgba(255,255,255,.15)}
 .atas .dalam{display:flex;align-items:center;gap:16px;min-height:68px}
 .merek{display:flex;align-items:center;gap:10px;text-decoration:none;margin-right:auto;font:700 1.25rem var(--judul);letter-spacing:.3px}.merek img{height:34px;width:auto}
-.atas nav{display:flex;align-items:center;gap:2px}.atas nav a{padding:8px 13px;border-radius:99px;text-decoration:none;font-size:.95rem;opacity:.9}.atas nav a:hover{background:rgba(255,255,255,.12);opacity:1}.atas nav a.aktif{background:var(--coral);opacity:1;font-weight:600}
+.atas nav{display:flex;align-items:center;gap:2px}.atas nav a{padding:8px 13px;border-radius:99px;text-decoration:none;font-size:.95rem;opacity:.9;transition:background .2s ease,opacity .2s ease,transform .15s ease}.atas nav a:hover{background:rgba(255,255,255,.12);opacity:1}.atas nav a.aktif{background:var(--coral);opacity:1;font-weight:600}
 .burger{display:none;background:none;border:0;color:#fff;padding:8px;cursor:pointer}.burger svg{width:26px;height:26px}
 /* tombol */
 .btn{display:inline-block;border:0;border-radius:12px;padding:13px 24px;font:600 1rem var(--font);cursor:pointer;background:var(--coral);color:#fff;text-decoration:none;transition:transform .15s,background .15s}.btn:hover{background:var(--coral-2);transform:translateY(-1px)}

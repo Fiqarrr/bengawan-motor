@@ -43,7 +43,7 @@ function toast(teks, galat = false) {
 }
 async function pasangNav() {
   const u = await api('/api/saya').catch(() => null), B = BENGKEL;
-  const hal = location.pathname.replace(/index\.html$/, ''), home = hal === '/', p = home ? '' : '/';
+  const hal = location.pathname.replace(/index\.html$/, ''), home = hal === '/' || hal === '', p = home ? '' : '/';
   const T = (href, label) => `<a href="${href}"${hal === href ? ' class="aktif" aria-current="page"' : ''}>${label}</a>`;
   const akun = !u ? T('/auth.html', 'Masuk / Daftar') : u.role === 'admin' ? `${T('/admin.html', 'Dashboard admin')}<a href="#" id="keluar">Keluar</a>`
     : `${T('/reservasi.html', 'Reservasi saya')}<a href="#" id="keluar">Keluar (${esc(u.nama.split(' ')[0])})</a>`;
@@ -63,6 +63,62 @@ async function pasangNav() {
   const bg = $('.burger'); bg.onclick = () => { const o = document.body.classList.toggle('nav-buka'); bg.setAttribute('aria-expanded', o); };
   document.querySelectorAll('#nav a').forEach(a => a.addEventListener('click', () => document.body.classList.remove('nav-buka')));
   const k = $('#keluar'); if (k) k.onclick = async e => { e.preventDefault(); await api('/api/keluar', 'POST'); location.href = '/'; };
+
+  // ScrollSpy realtime untuk navigasi di halaman utama
+  if (home) {
+    const navLinks = document.querySelectorAll('#nav a');
+    const ids = ['layanan', 'tentang', 'galeri', 'faq', 'lokasi'];
+    const sections = ids.map(id => document.getElementById(id)).filter(Boolean);
+
+    let frame = 0;
+    const updateActiveNav = () => {
+      frame = 0;
+      const scrollY = window.scrollY;
+      const header = $('.atas');
+      if (header) header.classList.toggle('melayang', scrollY > 20);
+
+      const atBottom = (window.innerHeight + scrollY) >= (document.documentElement.scrollHeight - 60);
+      let activeId = null;
+
+      if (atBottom) {
+        activeId = ids[ids.length - 1];
+      } else {
+        for (let i = sections.length - 1; i >= 0; i--) {
+          const sec = sections[i];
+          const top = sec.getBoundingClientRect().top;
+          if (top <= 140) {
+            activeId = sec.id;
+            break;
+          }
+        }
+      }
+
+      navLinks.forEach(a => {
+        const href = a.getAttribute('href') || '';
+        if (activeId) {
+          const match = href === `#${activeId}` || href.endsWith(`#${activeId}`);
+          a.classList.toggle('aktif', match);
+          if (match) a.setAttribute('aria-current', 'page');
+          else a.removeAttribute('aria-current');
+        } else {
+          const isHome = href === '/' || href === '';
+          a.classList.toggle('aktif', isHome);
+          if (isHome) a.setAttribute('aria-current', 'page');
+          else a.removeAttribute('aria-current');
+        }
+      });
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(updateActiveNav);
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    updateActiveNav();
+    setTimeout(updateActiveNav, 150);
+  }
+
   return u;
 }
 const fmtTgl = t => new Date(t + 'T00:00:00').toLocaleDateString('id-ID', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
